@@ -1,0 +1,1511 @@
+{
+  "overall_metrics": {
+    "mAP_0.5:0.95": 0.24814918571697858,
+    "mAP_0.5": 0.4001099667219199,
+    "mAP_0.75": 0.2590373358871681,
+    "mAP_small": 0.050093228599364395,
+    "mAP_medium": 0.2725660168325168,
+    "mAP_large": 0.4401209238558037,
+    "mAR_1": 0.21703417917918322,
+    "mAR_10": 0.30307019139773245,
+    "mAR_100": 0.3082575945228018,
+    "mAR_small": 0.057202922197937954,
+    "mAR_medium": 0.34347591552192797,
+    "mAR_large": 0.5326825256837678
+  },
+  "category_results": {
+    "person": {
+      "category_id": 1,
+      "mAP_0.5:0.95": 0.2995032426819276,
+      "mAP_0.5": 0.5861683957720992,
+      "gt_annotations": 11004,
+      "predictions": 16255
+    },
+    "bicycle": {
+      "category_id": 2,
+      "mAP_0.5:0.95": 0.21058228348592187,
+      "mAP_0.5": 0.3395769916440275,
+      "gt_annotations": 316,
+      "predictions": 314
+    },
+    "car": {
+      "category_id": 3,
+      "mAP_0.5:0.95": 0.23801100850397308,
+      "mAP_0.5": 0.33491817036812976,
+      "gt_annotations": 1932,
+      "predictions": 3077
+    },
+    "motorcycle": {
+      "category_id": 4,
+      "mAP_0.5:0.95": 0.23157533385460638,
+      "mAP_0.5": 0.5321155781121399,
+      "gt_annotations": 371,
+      "predictions": 448
+    },
+    "airplane": {
+      "category_id": 5,
+      "mAP_0.5:0.95": 0.4436182097311789,
+      "mAP_0.5": 0.7336314490763238,
+      "gt_annotations": 143,
+      "predictions": 267
+    },
+    "bus": {
+      "category_id": 6,
+      "mAP_0.5:0.95": 0.32591660163183983,
+      "mAP_0.5": 0.6052425733769585,
+      "gt_annotations": 285,
+      "predictions": 305
+    },
+    "train": {
+      "category_id": 7,
+      "mAP_0.5:0.95": 0.31201765690350386,
+      "mAP_0.5": 0.7561450963953747,
+      "gt_annotations": 190,
+      "predictions": 253
+    },
+    "truck": {
+      "category_id": 8,
+      "mAP_0.5:0.95": 0.1440552474140624,
+      "mAP_0.5": 0.26007355111142255,
+      "gt_annotations": 415,
+      "predictions": 408
+    },
+    "boat": {
+      "category_id": 9,
+      "mAP_0.5:0.95": 0.1486357743965367,
+      "mAP_0.5": 0.23723839267620442,
+      "gt_annotations": 430,
+      "predictions": 584
+    },
+    "traffic light": {
+      "category_id": 10,
+      "mAP_0.5:0.95": 0.19554113450372912,
+      "mAP_0.5": 0.17762633002231684,
+      "gt_annotations": 637,
+      "predictions": 717
+    },
+    "fire hydrant": {
+      "category_id": 11,
+      "mAP_0.5:0.95": 0.42075248596046827,
+      "mAP_0.5": 0.6452134655042042,
+      "gt_annotations": 101,
+      "predictions": 98
+    },
+    "stop sign": {
+      "category_id": 13,
+      "mAP_0.5:0.95": 0.4846559476127984,
+      "mAP_0.5": 0.572659187553905,
+      "gt_annotations": 75,
+      "predictions": 74
+    },
+    "parking meter": {
+      "category_id": 14,
+      "mAP_0.5:0.95": 0.24897936386478006,
+      "mAP_0.5": 0.4366986390589073,
+      "gt_annotations": 60,
+      "predictions": 57
+    },
+    "bench": {
+      "category_id": 15,
+      "mAP_0.5:0.95": 0.1410914113241073,
+      "mAP_0.5": 0.22814829306250498,
+      "gt_annotations": 413,
+      "predictions": 457
+    },
+    "bird": {
+      "category_id": 16,
+      "mAP_0.5:0.95": 0.27526383258924225,
+      "mAP_0.5": 0.30965152670557644,
+      "gt_annotations": 440,
+      "predictions": 435
+    },
+    "cat": {
+      "category_id": 17,
+      "mAP_0.5:0.95": 0.35878468679553793,
+      "mAP_0.5": 0.7662402276577079,
+      "gt_annotations": 202,
+      "predictions": 258
+    },
+    "dog": {
+      "category_id": 18,
+      "mAP_0.5:0.95": 0.35692283576352485,
+      "mAP_0.5": 0.649818325917797,
+      "gt_annotations": 218,
+      "predictions": 265
+    },
+    "horse": {
+      "category_id": 19,
+      "mAP_0.5:0.95": 0.3117687795270266,
+      "mAP_0.5": 0.6140716116973551,
+      "gt_annotations": 273,
+      "predictions": 347
+    },
+    "sheep": {
+      "category_id": 20,
+      "mAP_0.5:0.95": 0.22720572131540442,
+      "mAP_0.5": 0.5237665406635696,
+      "gt_annotations": 361,
+      "predictions": 583
+    },
+    "cow": {
+      "category_id": 21,
+      "mAP_0.5:0.95": 0.2658041317311905,
+      "mAP_0.5": 0.501821643002525,
+      "gt_annotations": 380,
+      "predictions": 595
+    },
+    "elephant": {
+      "category_id": 22,
+      "mAP_0.5:0.95": 0.3174027558371196,
+      "mAP_0.5": 0.7517467456925155,
+      "gt_annotations": 255,
+      "predictions": 407
+    },
+    "bear": {
+      "category_id": 23,
+      "mAP_0.5:0.95": 0.5068293902773868,
+      "mAP_0.5": 0.7882531587249118,
+      "gt_annotations": 71,
+      "predictions": 77
+    },
+    "zebra": {
+      "category_id": 24,
+      "mAP_0.5:0.95": 0.3811551202257741,
+      "mAP_0.5": 0.7784731141812188,
+      "gt_annotations": 268,
+      "predictions": 400
+    },
+    "giraffe": {
+      "category_id": 25,
+      "mAP_0.5:0.95": 0.41663772998422455,
+      "mAP_0.5": 0.8113618053058538,
+      "gt_annotations": 232,
+      "predictions": 318
+    },
+    "backpack": {
+      "category_id": 27,
+      "mAP_0.5:0.95": 0.05800763159588538,
+      "mAP_0.5": 0.0796081312935187,
+      "gt_annotations": 371,
+      "predictions": 295
+    },
+    "umbrella": {
+      "category_id": 28,
+      "mAP_0.5:0.95": 0.23335814983810654,
+      "mAP_0.5": 0.4368900591121138,
+      "gt_annotations": 413,
+      "predictions": 505
+    },
+    "handbag": {
+      "category_id": 31,
+      "mAP_0.5:0.95": 0.036699519857993856,
+      "mAP_0.5": 0.05304606086892825,
+      "gt_annotations": 540,
+      "predictions": 364
+    },
+    "tie": {
+      "category_id": 32,
+      "mAP_0.5:0.95": 0.2068351180183194,
+      "mAP_0.5": 0.27267554872721955,
+      "gt_annotations": 254,
+      "predictions": 255
+    },
+    "suitcase": {
+      "category_id": 33,
+      "mAP_0.5:0.95": 0.15486187136290055,
+      "mAP_0.5": 0.30960913571866616,
+      "gt_annotations": 303,
+      "predictions": 327
+    },
+    "frisbee": {
+      "category_id": 34,
+      "mAP_0.5:0.95": 0.45197506457584,
+      "mAP_0.5": 0.4857509085681704,
+      "gt_annotations": 115,
+      "predictions": 107
+    },
+    "skis": {
+      "category_id": 35,
+      "mAP_0.5:0.95": 0.16763696740632725,
+      "mAP_0.5": 0.27000614684566204,
+      "gt_annotations": 241,
+      "predictions": 312
+    },
+    "snowboard": {
+      "category_id": 36,
+      "mAP_0.5:0.95": 0.16844047750222696,
+      "mAP_0.5": 0.25910780030789965,
+      "gt_annotations": 69,
+      "predictions": 77
+    },
+    "sports ball": {
+      "category_id": 37,
+      "mAP_0.5:0.95": 0.303391164507078,
+      "mAP_0.5": 0.22505685109617216,
+      "gt_annotations": 263,
+      "predictions": 202
+    },
+    "kite": {
+      "category_id": 38,
+      "mAP_0.5:0.95": 0.2277702290381655,
+      "mAP_0.5": 0.3433564811258271,
+      "gt_annotations": 336,
+      "predictions": 434
+    },
+    "baseball bat": {
+      "category_id": 39,
+      "mAP_0.5:0.95": 0.12841510164874553,
+      "mAP_0.5": 0.3456431169521588,
+      "gt_annotations": 146,
+      "predictions": 162
+    },
+    "baseball glove": {
+      "category_id": 40,
+      "mAP_0.5:0.95": 0.28037369726181743,
+      "mAP_0.5": 0.326380772470407,
+      "gt_annotations": 148,
+      "predictions": 161
+    },
+    "skateboard": {
+      "category_id": 41,
+      "mAP_0.5:0.95": 0.30839475856607984,
+      "mAP_0.5": 0.5241520848247812,
+      "gt_annotations": 179,
+      "predictions": 289
+    },
+    "surfboard": {
+      "category_id": 42,
+      "mAP_0.5:0.95": 0.20531245060705794,
+      "mAP_0.5": 0.3748599645145918,
+      "gt_annotations": 269,
+      "predictions": 314
+    },
+    "tennis racket": {
+      "category_id": 43,
+      "mAP_0.5:0.95": 0.2868912194375941,
+      "mAP_0.5": 0.544336663628899,
+      "gt_annotations": 225,
+      "predictions": 298
+    },
+    "bottle": {
+      "category_id": 44,
+      "mAP_0.5:0.95": 0.1824197790726953,
+      "mAP_0.5": 0.20057571177901073,
+      "gt_annotations": 1025,
+      "predictions": 1288
+    },
+    "wine glass": {
+      "category_id": 46,
+      "mAP_0.5:0.95": 0.17703107551019442,
+      "mAP_0.5": 0.19403181037136033,
+      "gt_annotations": 343,
+      "predictions": 275
+    },
+    "cup": {
+      "category_id": 47,
+      "mAP_0.5:0.95": 0.20504483467420148,
+      "mAP_0.5": 0.2456707263619824,
+      "gt_annotations": 899,
+      "predictions": 1003
+    },
+    "fork": {
+      "category_id": 48,
+      "mAP_0.5:0.95": 0.14189651675767506,
+      "mAP_0.5": 0.2066927626221872,
+      "gt_annotations": 215,
+      "predictions": 190
+    },
+    "knife": {
+      "category_id": 49,
+      "mAP_0.5:0.95": 0.06634570834696178,
+      "mAP_0.5": 0.060661036576102376,
+      "gt_annotations": 326,
+      "predictions": 247
+    },
+    "spoon": {
+      "category_id": 50,
+      "mAP_0.5:0.95": 0.04457708831524947,
+      "mAP_0.5": 0.0517281694663952,
+      "gt_annotations": 253,
+      "predictions": 112
+    },
+    "bowl": {
+      "category_id": 51,
+      "mAP_0.5:0.95": 0.1919487411345707,
+      "mAP_0.5": 0.3340758248202815,
+      "gt_annotations": 626,
+      "predictions": 790
+    },
+    "banana": {
+      "category_id": 52,
+      "mAP_0.5:0.95": 0.14493150583436237,
+      "mAP_0.5": 0.3010912569380744,
+      "gt_annotations": 379,
+      "predictions": 578
+    },
+    "apple": {
+      "category_id": 53,
+      "mAP_0.5:0.95": 0.09051802311969759,
+      "mAP_0.5": 0.12767020404187693,
+      "gt_annotations": 239,
+      "predictions": 242
+    },
+    "sandwich": {
+      "category_id": 54,
+      "mAP_0.5:0.95": 0.15333039105841464,
+      "mAP_0.5": 0.3539509611627015,
+      "gt_annotations": 177,
+      "predictions": 233
+    },
+    "orange": {
+      "category_id": 55,
+      "mAP_0.5:0.95": 0.19157155119846234,
+      "mAP_0.5": 0.29482236114399074,
+      "gt_annotations": 287,
+      "predictions": 406
+    },
+    "broccoli": {
+      "category_id": 56,
+      "mAP_0.5:0.95": 0.1149882698260286,
+      "mAP_0.5": 0.3288500344819289,
+      "gt_annotations": 316,
+      "predictions": 623
+    },
+    "carrot": {
+      "category_id": 57,
+      "mAP_0.5:0.95": 0.13448563630449342,
+      "mAP_0.5": 0.2738646072608599,
+      "gt_annotations": 371,
+      "predictions": 617
+    },
+    "hot dog": {
+      "category_id": 58,
+      "mAP_0.5:0.95": 0.20418621835859246,
+      "mAP_0.5": 0.404893201856375,
+      "gt_annotations": 127,
+      "predictions": 130
+    },
+    "pizza": {
+      "category_id": 59,
+      "mAP_0.5:0.95": 0.2832937178384909,
+      "mAP_0.5": 0.5456156916241113,
+      "gt_annotations": 285,
+      "predictions": 352
+    },
+    "donut": {
+      "category_id": 60,
+      "mAP_0.5:0.95": 0.21919186147198957,
+      "mAP_0.5": 0.3111338984273503,
+      "gt_annotations": 338,
+      "predictions": 390
+    },
+    "cake": {
+      "category_id": 61,
+      "mAP_0.5:0.95": 0.18779379203917723,
+      "mAP_0.5": 0.3666862328915269,
+      "gt_annotations": 316,
+      "predictions": 354
+    },
+    "chair": {
+      "category_id": 62,
+      "mAP_0.5:0.95": 0.14454940549630874,
+      "mAP_0.5": 0.23605965922363614,
+      "gt_annotations": 1791,
+      "predictions": 2018
+    },
+    "couch": {
+      "category_id": 63,
+      "mAP_0.5:0.95": 0.18855211818910275,
+      "mAP_0.5": 0.4840857364145069,
+      "gt_annotations": 261,
+      "predictions": 373
+    },
+    "potted plant": {
+      "category_id": 64,
+      "mAP_0.5:0.95": 0.12946812094424137,
+      "mAP_0.5": 0.3107435008923076,
+      "gt_annotations": 343,
+      "predictions": 553
+    },
+    "bed": {
+      "category_id": 65,
+      "mAP_0.5:0.95": 0.184660126374477,
+      "mAP_0.5": 0.5378740537364272,
+      "gt_annotations": 163,
+      "predictions": 215
+    },
+    "dining table": {
+      "category_id": 67,
+      "mAP_0.5:0.95": 0.1538294980925483,
+      "mAP_0.5": 0.3229468212370282,
+      "gt_annotations": 697,
+      "predictions": 950
+    },
+    "toilet": {
+      "category_id": 70,
+      "mAP_0.5:0.95": 0.38975754466898055,
+      "mAP_0.5": 0.7851850925977256,
+      "gt_annotations": 179,
+      "predictions": 277
+    },
+    "tv": {
+      "category_id": 72,
+      "mAP_0.5:0.95": 0.32058691951345886,
+      "mAP_0.5": 0.607481715757478,
+      "gt_annotations": 288,
+      "predictions": 450
+    },
+    "laptop": {
+      "category_id": 73,
+      "mAP_0.5:0.95": 0.3155343691095272,
+      "mAP_0.5": 0.59255202248885,
+      "gt_annotations": 231,
+      "predictions": 280
+    },
+    "mouse": {
+      "category_id": 74,
+      "mAP_0.5:0.95": 0.39631714363659665,
+      "mAP_0.5": 0.46650036335976475,
+      "gt_annotations": 106,
+      "predictions": 134
+    },
+    "remote": {
+      "category_id": 75,
+      "mAP_0.5:0.95": 0.14559255088116646,
+      "mAP_0.5": 0.15058713624689002,
+      "gt_annotations": 283,
+      "predictions": 360
+    },
+    "keyboard": {
+      "category_id": 76,
+      "mAP_0.5:0.95": 0.26837907034653935,
+      "mAP_0.5": 0.5237067121669735,
+      "gt_annotations": 153,
+      "predictions": 233
+    },
+    "cell phone": {
+      "category_id": 77,
+      "mAP_0.5:0.95": 0.23720385838316482,
+      "mAP_0.5": 0.27024288576507766,
+      "gt_annotations": 262,
+      "predictions": 280
+    },
+    "microwave": {
+      "category_id": 78,
+      "mAP_0.5:0.95": 0.3321029850168233,
+      "mAP_0.5": 0.6070002366724893,
+      "gt_annotations": 55,
+      "predictions": 98
+    },
+    "oven": {
+      "category_id": 79,
+      "mAP_0.5:0.95": 0.20835852138600244,
+      "mAP_0.5": 0.4429120487700668,
+      "gt_annotations": 143,
+      "predictions": 204
+    },
+    "toaster": {
+      "category_id": 80,
+      "mAP_0.5:0.95": 0.08688118811881188,
+      "mAP_0.5": 0.22772277227722773,
+      "gt_annotations": 9,
+      "predictions": 5
+    },
+    "sink": {
+      "category_id": 81,
+      "mAP_0.5:0.95": 0.23709881529319246,
+      "mAP_0.5": 0.4016652255880076,
+      "gt_annotations": 225,
+      "predictions": 407
+    },
+    "refrigerator": {
+      "category_id": 82,
+      "mAP_0.5:0.95": 0.2411852895938745,
+      "mAP_0.5": 0.5980611758214422,
+      "gt_annotations": 126,
+      "predictions": 167
+    },
+    "book": {
+      "category_id": 84,
+      "mAP_0.5:0.95": 0.05686042747076299,
+      "mAP_0.5": 0.10373021500144411,
+      "gt_annotations": 1161,
+      "predictions": 1693
+    },
+    "clock": {
+      "category_id": 85,
+      "mAP_0.5:0.95": 0.33156049495242806,
+      "mAP_0.5": 0.5199657234335658,
+      "gt_annotations": 267,
+      "predictions": 330
+    },
+    "vase": {
+      "category_id": 86,
+      "mAP_0.5:0.95": 0.19743126579479517,
+      "mAP_0.5": 0.30592054586168077,
+      "gt_annotations": 277,
+      "predictions": 319
+    },
+    "scissors": {
+      "category_id": 87,
+      "mAP_0.5:0.95": 0.2702610838006878,
+      "mAP_0.5": 0.3962300076161463,
+      "gt_annotations": 36,
+      "predictions": 45
+    },
+    "teddy bear": {
+      "category_id": 88,
+      "mAP_0.5:0.95": 0.24277712021336983,
+      "mAP_0.5": 0.5551660675066191,
+      "gt_annotations": 191,
+      "predictions": 329
+    },
+    "hair drier": {
+      "category_id": 89,
+      "mAP_0.5:0.95": 0.0,
+      "mAP_0.5": 0.0,
+      "gt_annotations": 11,
+      "predictions": 0
+    },
+    "toothbrush": {
+      "category_id": 90,
+      "mAP_0.5:0.95": 0.1784982506510221,
+      "mAP_0.5": 0.1693025881535522,
+      "gt_annotations": 57,
+      "predictions": 74
+    }
+  },
+  "distribution_analysis": {
+    "predictions_by_category": {
+      "person": 16255,
+      "bowl": 790,
+      "dining table": 950,
+      "oven": 204,
+      "handbag": 364,
+      "potted plant": 553,
+      "cup": 1003,
+      "refrigerator": 167,
+      "orange": 406,
+      "microwave": 98,
+      "suitcase": 327,
+      "umbrella": 505,
+      "bench": 457,
+      "backpack": 295,
+      "skateboard": 289,
+      "bicycle": 314,
+      "car": 3077,
+      "traffic light": 717,
+      "toilet": 277,
+      "sink": 407,
+      "motorcycle": 448,
+      "truck": 408,
+      "laptop": 280,
+      "book": 1693,
+      "keyboard": 233,
+      "vase": 319,
+      "chair": 2018,
+      "tv": 450,
+      "apple": 242,
+      "bottle": 1288,
+      "airplane": 267,
+      "giraffe": 318,
+      "cow": 595,
+      "bird": 435,
+      "bus": 305,
+      "parking meter": 57,
+      "couch": 373,
+      "train": 253,
+      "stop sign": 74,
+      "dog": 265,
+      "cat": 258,
+      "sheep": 583,
+      "clock": 330,
+      "tie": 255,
+      "boat": 584,
+      "elephant": 407,
+      "frisbee": 107,
+      "bear": 77,
+      "zebra": 400,
+      "horse": 347,
+      "skis": 312,
+      "baseball glove": 161,
+      "baseball bat": 162,
+      "banana": 578,
+      "broccoli": 623,
+      "donut": 390,
+      "pizza": 352,
+      "sandwich": 233,
+      "carrot": 617,
+      "tennis racket": 298,
+      "cake": 354,
+      "knife": 247,
+      "sports ball": 202,
+      "bed": 215,
+      "surfboard": 314,
+      "toothbrush": 74,
+      "remote": 360,
+      "kite": 434,
+      "fork": 190,
+      "mouse": 134,
+      "teddy bear": 329,
+      "cell phone": 280,
+      "scissors": 45,
+      "wine glass": 275,
+      "spoon": 112,
+      "fire hydrant": 98,
+      "hot dog": 130,
+      "toaster": 5,
+      "snowboard": 77
+    },
+    "ground_truth_by_category": {
+      "person": 11004,
+      "bicycle": 316,
+      "car": 1932,
+      "motorcycle": 371,
+      "airplane": 143,
+      "bus": 285,
+      "train": 190,
+      "truck": 415,
+      "boat": 430,
+      "traffic light": 637,
+      "fire hydrant": 101,
+      "stop sign": 75,
+      "parking meter": 60,
+      "bench": 413,
+      "bird": 440,
+      "cat": 202,
+      "dog": 218,
+      "horse": 273,
+      "sheep": 361,
+      "cow": 380,
+      "elephant": 255,
+      "bear": 71,
+      "zebra": 268,
+      "giraffe": 232,
+      "backpack": 371,
+      "umbrella": 413,
+      "handbag": 540,
+      "tie": 254,
+      "suitcase": 303,
+      "frisbee": 115,
+      "skis": 241,
+      "snowboard": 69,
+      "sports ball": 263,
+      "kite": 336,
+      "baseball bat": 146,
+      "baseball glove": 148,
+      "skateboard": 179,
+      "surfboard": 269,
+      "tennis racket": 225,
+      "bottle": 1025,
+      "wine glass": 343,
+      "cup": 899,
+      "fork": 215,
+      "knife": 326,
+      "spoon": 253,
+      "bowl": 626,
+      "banana": 379,
+      "apple": 239,
+      "sandwich": 177,
+      "orange": 287,
+      "broccoli": 316,
+      "carrot": 371,
+      "hot dog": 127,
+      "pizza": 285,
+      "donut": 338,
+      "cake": 316,
+      "chair": 1791,
+      "couch": 261,
+      "potted plant": 343,
+      "bed": 163,
+      "dining table": 697,
+      "toilet": 179,
+      "tv": 288,
+      "laptop": 231,
+      "mouse": 106,
+      "remote": 283,
+      "keyboard": 153,
+      "cell phone": 262,
+      "microwave": 55,
+      "oven": 143,
+      "toaster": 9,
+      "sink": 225,
+      "refrigerator": 126,
+      "book": 1161,
+      "clock": 267,
+      "vase": 277,
+      "scissors": 36,
+      "teddy bear": 191,
+      "hair drier": 11,
+      "toothbrush": 57
+    },
+    "score_statistics": {
+      "person": {
+        "mean_score": 0.3803937730698247,
+        "std_score": 0.22594998775686365,
+        "min_score": 0.16015625,
+        "max_score": 0.96875,
+        "median_score": 0.27734375
+      },
+      "bowl": {
+        "mean_score": 0.3373615506329114,
+        "std_score": 0.15489741699722942,
+        "min_score": 0.16015625,
+        "max_score": 0.7578125,
+        "median_score": 0.29296875
+      },
+      "dining table": {
+        "mean_score": 0.3430550986842105,
+        "std_score": 0.1593464229465795,
+        "min_score": 0.16015625,
+        "max_score": 0.7890625,
+        "median_score": 0.29296875
+      },
+      "oven": {
+        "mean_score": 0.3538411458333333,
+        "std_score": 0.19467027979286472,
+        "min_score": 0.16015625,
+        "max_score": 0.80078125,
+        "median_score": 0.27734375
+      },
+      "handbag": {
+        "mean_score": 0.23626373626373626,
+        "std_score": 0.08209175848673139,
+        "min_score": 0.16015625,
+        "max_score": 0.56640625,
+        "median_score": 0.2109375
+      },
+      "potted plant": {
+        "mean_score": 0.2862581939421338,
+        "std_score": 0.12480913241300566,
+        "min_score": 0.16015625,
+        "max_score": 0.70703125,
+        "median_score": 0.2421875
+      },
+      "cup": {
+        "mean_score": 0.32655159521435695,
+        "std_score": 0.1669651321787475,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.26171875
+      },
+      "refrigerator": {
+        "mean_score": 0.4272314745508982,
+        "std_score": 0.23375686131406212,
+        "min_score": 0.16015625,
+        "max_score": 0.890625,
+        "median_score": 0.3515625
+      },
+      "orange": {
+        "mean_score": 0.33091517857142855,
+        "std_score": 0.14518310011704913,
+        "min_score": 0.16015625,
+        "max_score": 0.72265625,
+        "median_score": 0.29296875
+      },
+      "microwave": {
+        "mean_score": 0.3732860331632653,
+        "std_score": 0.2124753986430908,
+        "min_score": 0.16015625,
+        "max_score": 0.8515625,
+        "median_score": 0.26953125
+      },
+      "suitcase": {
+        "mean_score": 0.3349340596330275,
+        "std_score": 0.1562219880666289,
+        "min_score": 0.16015625,
+        "max_score": 0.7890625,
+        "median_score": 0.27734375
+      },
+      "umbrella": {
+        "mean_score": 0.36045018564356435,
+        "std_score": 0.1765396987149096,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.29296875
+      },
+      "bench": {
+        "mean_score": 0.30366178884026257,
+        "std_score": 0.17233871178219806,
+        "min_score": 0.16015625,
+        "max_score": 0.83984375,
+        "median_score": 0.2265625
+      },
+      "backpack": {
+        "mean_score": 0.2541048728813559,
+        "std_score": 0.09454778330392051,
+        "min_score": 0.16015625,
+        "max_score": 0.62890625,
+        "median_score": 0.2265625
+      },
+      "skateboard": {
+        "mean_score": 0.3599021410034602,
+        "std_score": 0.18840899265302574,
+        "min_score": 0.16015625,
+        "max_score": 0.83984375,
+        "median_score": 0.29296875
+      },
+      "bicycle": {
+        "mean_score": 0.3492237261146497,
+        "std_score": 0.1865606653470039,
+        "min_score": 0.16015625,
+        "max_score": 0.83984375,
+        "median_score": 0.27734375
+      },
+      "car": {
+        "mean_score": 0.2864727209944751,
+        "std_score": 0.15427730520836855,
+        "min_score": 0.16015625,
+        "max_score": 0.8828125,
+        "median_score": 0.2265625
+      },
+      "traffic light": {
+        "mean_score": 0.2578125,
+        "std_score": 0.13050051118657463,
+        "min_score": 0.16015625,
+        "max_score": 0.80078125,
+        "median_score": 0.2109375
+      },
+      "toilet": {
+        "mean_score": 0.48299300541516244,
+        "std_score": 0.2367696615963543,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.45703125
+      },
+      "sink": {
+        "mean_score": 0.305176980958231,
+        "std_score": 0.1591784712222116,
+        "min_score": 0.16015625,
+        "max_score": 0.7734375,
+        "median_score": 0.2421875
+      },
+      "motorcycle": {
+        "mean_score": 0.4005824497767857,
+        "std_score": 0.21148247288445227,
+        "min_score": 0.16015625,
+        "max_score": 0.90625,
+        "median_score": 0.33203125
+      },
+      "truck": {
+        "mean_score": 0.33646407781862747,
+        "std_score": 0.1883453645609082,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.2421875
+      },
+      "laptop": {
+        "mean_score": 0.47706473214285716,
+        "std_score": 0.23496570040350845,
+        "min_score": 0.16015625,
+        "max_score": 0.890625,
+        "median_score": 0.45703125
+      },
+      "book": {
+        "mean_score": 0.2372798840815121,
+        "std_score": 0.06570834096915172,
+        "min_score": 0.16015625,
+        "max_score": 0.62890625,
+        "median_score": 0.2265625
+      },
+      "keyboard": {
+        "mean_score": 0.34373323497854075,
+        "std_score": 0.17493762070260135,
+        "min_score": 0.16015625,
+        "max_score": 0.8515625,
+        "median_score": 0.27734375
+      },
+      "vase": {
+        "mean_score": 0.340015184169279,
+        "std_score": 0.19553907625558709,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.26171875
+      },
+      "chair": {
+        "mean_score": 0.28864438800792863,
+        "std_score": 0.1386646876299755,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.2421875
+      },
+      "tv": {
+        "mean_score": 0.41515625,
+        "std_score": 0.21666234095241182,
+        "min_score": 0.16015625,
+        "max_score": 0.8515625,
+        "median_score": 0.3515625
+      },
+      "apple": {
+        "mean_score": 0.3087874483471074,
+        "std_score": 0.1297121292840567,
+        "min_score": 0.16015625,
+        "max_score": 0.72265625,
+        "median_score": 0.26171875
+      },
+      "bottle": {
+        "mean_score": 0.26714443420031053,
+        "std_score": 0.11799207634667122,
+        "min_score": 0.16015625,
+        "max_score": 0.73828125,
+        "median_score": 0.2265625
+      },
+      "airplane": {
+        "mean_score": 0.40806413857677903,
+        "std_score": 0.23927181218656157,
+        "min_score": 0.16015625,
+        "max_score": 0.90625,
+        "median_score": 0.3125
+      },
+      "giraffe": {
+        "mean_score": 0.5315325275157232,
+        "std_score": 0.27838189379600375,
+        "min_score": 0.16015625,
+        "max_score": 0.9609375,
+        "median_score": 0.5546875
+      },
+      "cow": {
+        "mean_score": 0.3608718487394958,
+        "std_score": 0.1993083008441167,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.27734375
+      },
+      "bird": {
+        "mean_score": 0.3356052442528736,
+        "std_score": 0.19155910842208107,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.26171875
+      },
+      "bus": {
+        "mean_score": 0.5439805327868853,
+        "std_score": 0.2831065044783387,
+        "min_score": 0.16015625,
+        "max_score": 0.94140625,
+        "median_score": 0.54296875
+      },
+      "parking meter": {
+        "mean_score": 0.4153645833333333,
+        "std_score": 0.22882843610593315,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.33203125
+      },
+      "couch": {
+        "mean_score": 0.3652605563002681,
+        "std_score": 0.1810134412657001,
+        "min_score": 0.16015625,
+        "max_score": 0.7890625,
+        "median_score": 0.3125
+      },
+      "train": {
+        "mean_score": 0.52149209486166,
+        "std_score": 0.28055771095393695,
+        "min_score": 0.16015625,
+        "max_score": 0.9140625,
+        "median_score": 0.54296875
+      },
+      "stop sign": {
+        "mean_score": 0.621410472972973,
+        "std_score": 0.3045147129749045,
+        "min_score": 0.16015625,
+        "max_score": 0.953125,
+        "median_score": 0.75390625
+      },
+      "dog": {
+        "mean_score": 0.5118219339622642,
+        "std_score": 0.22669599178755934,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.54296875
+      },
+      "cat": {
+        "mean_score": 0.535655886627907,
+        "std_score": 0.21842975739434786,
+        "min_score": 0.16015625,
+        "max_score": 0.87109375,
+        "median_score": 0.60546875
+      },
+      "sheep": {
+        "mean_score": 0.3465507075471698,
+        "std_score": 0.18650209819703492,
+        "min_score": 0.16015625,
+        "max_score": 0.890625,
+        "median_score": 0.27734375
+      },
+      "clock": {
+        "mean_score": 0.4113873106060606,
+        "std_score": 0.2338349230633559,
+        "min_score": 0.16015625,
+        "max_score": 0.86328125,
+        "median_score": 0.3125
+      },
+      "tie": {
+        "mean_score": 0.2885110294117647,
+        "std_score": 0.14980682053818975,
+        "min_score": 0.16015625,
+        "max_score": 0.7890625,
+        "median_score": 0.2109375
+      },
+      "boat": {
+        "mean_score": 0.2723539169520548,
+        "std_score": 0.13060105892362567,
+        "min_score": 0.16015625,
+        "max_score": 0.81640625,
+        "median_score": 0.2265625
+      },
+      "elephant": {
+        "mean_score": 0.4650932893120393,
+        "std_score": 0.25426460570808673,
+        "min_score": 0.16015625,
+        "max_score": 0.9140625,
+        "median_score": 0.39453125
+      },
+      "frisbee": {
+        "mean_score": 0.46791033878504673,
+        "std_score": 0.23206613679265975,
+        "min_score": 0.16015625,
+        "max_score": 0.890625,
+        "median_score": 0.45703125
+      },
+      "bear": {
+        "mean_score": 0.6530032467532467,
+        "std_score": 0.25194823091035573,
+        "min_score": 0.16015625,
+        "max_score": 0.92578125,
+        "median_score": 0.7578125
+      },
+      "zebra": {
+        "mean_score": 0.47072265625,
+        "std_score": 0.269572431608239,
+        "min_score": 0.16015625,
+        "max_score": 0.953125,
+        "median_score": 0.3828125
+      },
+      "horse": {
+        "mean_score": 0.4507272154178674,
+        "std_score": 0.24747604551368915,
+        "min_score": 0.16015625,
+        "max_score": 0.9140625,
+        "median_score": 0.37109375
+      },
+      "skis": {
+        "mean_score": 0.2569986979166667,
+        "std_score": 0.10890840675025826,
+        "min_score": 0.16015625,
+        "max_score": 0.6484375,
+        "median_score": 0.2109375
+      },
+      "baseball glove": {
+        "mean_score": 0.3232239906832298,
+        "std_score": 0.1808311982652939,
+        "min_score": 0.16015625,
+        "max_score": 0.7734375,
+        "median_score": 0.2421875
+      },
+      "baseball bat": {
+        "mean_score": 0.2962239583333333,
+        "std_score": 0.14282894024332415,
+        "min_score": 0.16015625,
+        "max_score": 0.6875,
+        "median_score": 0.2265625
+      },
+      "banana": {
+        "mean_score": 0.294752919550173,
+        "std_score": 0.129812090464717,
+        "min_score": 0.16015625,
+        "max_score": 0.7578125,
+        "median_score": 0.26171875
+      },
+      "broccoli": {
+        "mean_score": 0.27951946227929375,
+        "std_score": 0.11797859142347156,
+        "min_score": 0.16015625,
+        "max_score": 0.73828125,
+        "median_score": 0.2265625
+      },
+      "donut": {
+        "mean_score": 0.36983173076923076,
+        "std_score": 0.21443464220132638,
+        "min_score": 0.16015625,
+        "max_score": 0.86328125,
+        "median_score": 0.27734375
+      },
+      "pizza": {
+        "mean_score": 0.4359685724431818,
+        "std_score": 0.2177887539965687,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.39453125
+      },
+      "sandwich": {
+        "mean_score": 0.3567261266094421,
+        "std_score": 0.17152884587500875,
+        "min_score": 0.16015625,
+        "max_score": 0.7890625,
+        "median_score": 0.29296875
+      },
+      "carrot": {
+        "mean_score": 0.2662644347649919,
+        "std_score": 0.10346714140576617,
+        "min_score": 0.16015625,
+        "max_score": 0.66796875,
+        "median_score": 0.2265625
+      },
+      "tennis racket": {
+        "mean_score": 0.37762164429530204,
+        "std_score": 0.20913540453937865,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.29296875
+      },
+      "cake": {
+        "mean_score": 0.3484948799435028,
+        "std_score": 0.1743094085464066,
+        "min_score": 0.16015625,
+        "max_score": 0.80078125,
+        "median_score": 0.29296875
+      },
+      "knife": {
+        "mean_score": 0.24183957489878544,
+        "std_score": 0.09124482392768694,
+        "min_score": 0.16015625,
+        "max_score": 0.60546875,
+        "median_score": 0.2109375
+      },
+      "sports ball": {
+        "mean_score": 0.28995204207920794,
+        "std_score": 0.1548469076296043,
+        "min_score": 0.16015625,
+        "max_score": 0.81640625,
+        "median_score": 0.2265625
+      },
+      "bed": {
+        "mean_score": 0.43753633720930235,
+        "std_score": 0.22968354202117336,
+        "min_score": 0.16015625,
+        "max_score": 0.8828125,
+        "median_score": 0.39453125
+      },
+      "surfboard": {
+        "mean_score": 0.3206359474522293,
+        "std_score": 0.16472108309742092,
+        "min_score": 0.16015625,
+        "max_score": 0.80078125,
+        "median_score": 0.251953125
+      },
+      "toothbrush": {
+        "mean_score": 0.26599451013513514,
+        "std_score": 0.12716396687357115,
+        "min_score": 0.16015625,
+        "max_score": 0.73828125,
+        "median_score": 0.2109375
+      },
+      "remote": {
+        "mean_score": 0.2533962673611111,
+        "std_score": 0.11733115903127393,
+        "min_score": 0.16015625,
+        "max_score": 0.7734375,
+        "median_score": 0.2109375
+      },
+      "kite": {
+        "mean_score": 0.3236067108294931,
+        "std_score": 0.1523907471770398,
+        "min_score": 0.16015625,
+        "max_score": 0.81640625,
+        "median_score": 0.27734375
+      },
+      "fork": {
+        "mean_score": 0.27882401315789473,
+        "std_score": 0.12502849560501444,
+        "min_score": 0.16015625,
+        "max_score": 0.6875,
+        "median_score": 0.2265625
+      },
+      "mouse": {
+        "mean_score": 0.35220382462686567,
+        "std_score": 0.18506476055031582,
+        "min_score": 0.16015625,
+        "max_score": 0.80078125,
+        "median_score": 0.29296875
+      },
+      "teddy bear": {
+        "mean_score": 0.3734327507598784,
+        "std_score": 0.213172211356851,
+        "min_score": 0.16015625,
+        "max_score": 0.828125,
+        "median_score": 0.27734375
+      },
+      "cell phone": {
+        "mean_score": 0.32621372767857143,
+        "std_score": 0.1769763392192374,
+        "min_score": 0.16015625,
+        "max_score": 0.83984375,
+        "median_score": 0.26171875
+      },
+      "scissors": {
+        "mean_score": 0.3394097222222222,
+        "std_score": 0.18458972280398872,
+        "min_score": 0.16015625,
+        "max_score": 0.73828125,
+        "median_score": 0.2421875
+      },
+      "wine glass": {
+        "mean_score": 0.3213778409090909,
+        "std_score": 0.17286237333850016,
+        "min_score": 0.16015625,
+        "max_score": 0.81640625,
+        "median_score": 0.2421875
+      },
+      "spoon": {
+        "mean_score": 0.26182338169642855,
+        "std_score": 0.09497499383702317,
+        "min_score": 0.16015625,
+        "max_score": 0.54296875,
+        "median_score": 0.2265625
+      },
+      "fire hydrant": {
+        "mean_score": 0.5915975765306123,
+        "std_score": 0.2737323724662383,
+        "min_score": 0.16015625,
+        "max_score": 0.9140625,
+        "median_score": 0.66796875
+      },
+      "hot dog": {
+        "mean_score": 0.34588341346153845,
+        "std_score": 0.17492050983931767,
+        "min_score": 0.16015625,
+        "max_score": 0.7734375,
+        "median_score": 0.27734375
+      },
+      "toaster": {
+        "mean_score": 0.178125,
+        "std_score": 0.025863977120698205,
+        "min_score": 0.16015625,
+        "max_score": 0.2265625,
+        "median_score": 0.16015625
+      },
+      "snowboard": {
+        "mean_score": 0.2682122564935065,
+        "std_score": 0.12320136178755654,
+        "min_score": 0.16015625,
+        "max_score": 0.6875,
+        "median_score": 0.2265625
+      }
+    },
+    "total_predictions": 48725,
+    "total_categories_detected": 79,
+    "total_categories_in_gt": 80
+  },
+  "evaluation_summary": {
+    "best_categories": [
+      [
+        "giraffe",
+        {
+          "category_id": 25,
+          "mAP_0.5:0.95": 0.41663772998422455,
+          "mAP_0.5": 0.8113618053058538,
+          "gt_annotations": 232,
+          "predictions": 318
+        }
+      ],
+      [
+        "bear",
+        {
+          "category_id": 23,
+          "mAP_0.5:0.95": 0.5068293902773868,
+          "mAP_0.5": 0.7882531587249118,
+          "gt_annotations": 71,
+          "predictions": 77
+        }
+      ],
+      [
+        "toilet",
+        {
+          "category_id": 70,
+          "mAP_0.5:0.95": 0.38975754466898055,
+          "mAP_0.5": 0.7851850925977256,
+          "gt_annotations": 179,
+          "predictions": 277
+        }
+      ],
+      [
+        "zebra",
+        {
+          "category_id": 24,
+          "mAP_0.5:0.95": 0.3811551202257741,
+          "mAP_0.5": 0.7784731141812188,
+          "gt_annotations": 268,
+          "predictions": 400
+        }
+      ],
+      [
+        "cat",
+        {
+          "category_id": 17,
+          "mAP_0.5:0.95": 0.35878468679553793,
+          "mAP_0.5": 0.7662402276577079,
+          "gt_annotations": 202,
+          "predictions": 258
+        }
+      ],
+      [
+        "train",
+        {
+          "category_id": 7,
+          "mAP_0.5:0.95": 0.31201765690350386,
+          "mAP_0.5": 0.7561450963953747,
+          "gt_annotations": 190,
+          "predictions": 253
+        }
+      ],
+      [
+        "elephant",
+        {
+          "category_id": 22,
+          "mAP_0.5:0.95": 0.3174027558371196,
+          "mAP_0.5": 0.7517467456925155,
+          "gt_annotations": 255,
+          "predictions": 407
+        }
+      ],
+      [
+        "airplane",
+        {
+          "category_id": 5,
+          "mAP_0.5:0.95": 0.4436182097311789,
+          "mAP_0.5": 0.7336314490763238,
+          "gt_annotations": 143,
+          "predictions": 267
+        }
+      ],
+      [
+        "dog",
+        {
+          "category_id": 18,
+          "mAP_0.5:0.95": 0.35692283576352485,
+          "mAP_0.5": 0.649818325917797,
+          "gt_annotations": 218,
+          "predictions": 265
+        }
+      ],
+      [
+        "fire hydrant",
+        {
+          "category_id": 11,
+          "mAP_0.5:0.95": 0.42075248596046827,
+          "mAP_0.5": 0.6452134655042042,
+          "gt_annotations": 101,
+          "predictions": 98
+        }
+      ]
+    ],
+    "worst_categories": [
+      [
+        "hair drier",
+        {
+          "category_id": 89,
+          "mAP_0.5:0.95": 0.0,
+          "mAP_0.5": 0.0,
+          "gt_annotations": 11,
+          "predictions": 0
+        }
+      ],
+      [
+        "spoon",
+        {
+          "category_id": 50,
+          "mAP_0.5:0.95": 0.04457708831524947,
+          "mAP_0.5": 0.0517281694663952,
+          "gt_annotations": 253,
+          "predictions": 112
+        }
+      ],
+      [
+        "handbag",
+        {
+          "category_id": 31,
+          "mAP_0.5:0.95": 0.036699519857993856,
+          "mAP_0.5": 0.05304606086892825,
+          "gt_annotations": 540,
+          "predictions": 364
+        }
+      ],
+      [
+        "knife",
+        {
+          "category_id": 49,
+          "mAP_0.5:0.95": 0.06634570834696178,
+          "mAP_0.5": 0.060661036576102376,
+          "gt_annotations": 326,
+          "predictions": 247
+        }
+      ],
+      [
+        "backpack",
+        {
+          "category_id": 27,
+          "mAP_0.5:0.95": 0.05800763159588538,
+          "mAP_0.5": 0.0796081312935187,
+          "gt_annotations": 371,
+          "predictions": 295
+        }
+      ],
+      [
+        "book",
+        {
+          "category_id": 84,
+          "mAP_0.5:0.95": 0.05686042747076299,
+          "mAP_0.5": 0.10373021500144411,
+          "gt_annotations": 1161,
+          "predictions": 1693
+        }
+      ],
+      [
+        "apple",
+        {
+          "category_id": 53,
+          "mAP_0.5:0.95": 0.09051802311969759,
+          "mAP_0.5": 0.12767020404187693,
+          "gt_annotations": 239,
+          "predictions": 242
+        }
+      ],
+      [
+        "remote",
+        {
+          "category_id": 75,
+          "mAP_0.5:0.95": 0.14559255088116646,
+          "mAP_0.5": 0.15058713624689002,
+          "gt_annotations": 283,
+          "predictions": 360
+        }
+      ],
+      [
+        "toothbrush",
+        {
+          "category_id": 90,
+          "mAP_0.5:0.95": 0.1784982506510221,
+          "mAP_0.5": 0.1693025881535522,
+          "gt_annotations": 57,
+          "predictions": 74
+        }
+      ],
+      [
+        "traffic light",
+        {
+          "category_id": 10,
+          "mAP_0.5:0.95": 0.19554113450372912,
+          "mAP_0.5": 0.17762633002231684,
+          "gt_annotations": 637,
+          "predictions": 717
+        }
+      ]
+    ],
+    "categories_with_no_predictions": [
+      "hair drier"
+    ],
+    "categories_with_no_ground_truth": []
+  }
+}

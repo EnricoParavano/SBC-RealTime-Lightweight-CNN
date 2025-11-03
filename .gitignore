@@ -1,0 +1,6 @@
+efficientdet_tests/EfficientDetD0INT8/output_images
+efficientdet_tests/EfficientDetD3INT8/output_images
+venv
+streaming_UDP/UDPstriming/env_striming
+streaming_UDP/UDPstriming/StrimingUDP/venv
+streaming_UDP/UDPstriming/StrimingUDP/.idea
