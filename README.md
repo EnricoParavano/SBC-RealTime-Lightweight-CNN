@@ -2,7 +2,7 @@
 
 Repository unico per l'addestramento, l'ottimizzazione e il deployment realtime di reti neurali leggere per la detection su dispositivi embedded.
 
-## 📚 Indice
+## Indice
 1. [Struttura generale](#-struttura-generale)
 2. [Prerequisiti](#-prerequisiti)
 3. [YOLOv8s – Pipeline di training](#-yolov8s--pipeline-di-training)
@@ -15,7 +15,7 @@ Repository unico per l'addestramento, l'ottimizzazione e il deployment realtime 
 
 ---
 
-## 📦 Struttura generale
+## Struttura generale
 ```
 SBC-RealTime-Lightweight-CNNs/
 ├── data/                        # Segnaposto per dataset locali (COCO, campioni di calibrazione, ecc.)
