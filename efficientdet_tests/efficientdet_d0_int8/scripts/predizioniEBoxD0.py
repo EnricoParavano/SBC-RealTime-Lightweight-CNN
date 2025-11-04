@@ -153,7 +153,7 @@ class EfficientDetInference:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Esegue l'inferenza con EfficientDet-D0 INT8 su COCO e salva predizioni e statistiche."
+            "Esegue l'inferenza con efficientDet-D0 INT8 su COCO e salva predizioni e statistiche."
         )
     )
     parser.add_argument("--model", default=DEFAULT_MODEL_PATH, help="Percorso al modello TFLite.")
@@ -189,7 +189,7 @@ def parse_args() -> argparse.Namespace:
         "--input-size",
         type=int,
         default=DEFAULT_INPUT_SIZE,
-        help="Dimensione di input (lato) utilizzata dal modello EfficientDet.",
+        help="Dimensione di input (lato) utilizzata dal modello efficientDet.",
     )
     parser.add_argument(
         "--category-offset",

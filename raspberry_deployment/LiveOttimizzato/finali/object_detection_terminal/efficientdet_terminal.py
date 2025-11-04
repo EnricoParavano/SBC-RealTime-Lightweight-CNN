@@ -1,4 +1,4 @@
-"""Terminal-based object detection script for EfficientDet Lite models."""
+"""Terminal-based object detection script for efficientDet Lite models."""
 import argparse
 import sys
 import time

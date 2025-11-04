@@ -32,7 +32,14 @@ efficientdet_tests/
 
 > Nota: gli script di inferenza creano automaticamente la cartella `reports/qualitative_samples`
 > (non tracciata in git) per salvare le prime immagini annotate.
+### Modelli pre-addestrati
 
+I modelli **EfficientDet-Lite0** e **EfficientDet-Lite3** utilizzati in questi test provengono da **Kaggle Models** e sono già **pre-addestrati sul dataset COCO 2017** e **quantizzati in formato INT8** per TensorFlow Lite.  
+Possono essere scaricati dal seguente link ufficiale:
+
+Link: [TensorFlow EfficientDet TFLite Models – Kaggle](https://www.kaggle.com/models/tensorflow/efficientdet/tfLite/lite0-int8)
+
+Questi modelli includono pesi compatibili con l’inferenza su dispositivi embedded (come Raspberry Pi o Jetson Orin Nano) e possono essere utilizzati direttamente come input negli script di test di questa cartella.
 ## Come riprodurre i risultati
 
 1. **Configura i percorsi locali** passando agli script i parametri `--model`, `--annotations`

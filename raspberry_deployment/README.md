@@ -1,6 +1,6 @@
 # Deploy di object detection su Raspberry Pi
 
-Questo spazio raccoglie tutti gli script usati per eseguire modelli TensorFlow Lite
+Questa cartella raccoglie tutti gli script usati per eseguire modelli TensorFlow Lite
 su Raspberry Pi. I file sono stati raggruppati per modalità di utilizzo, così da
 trovare subito ciò che serve sia per l'anteprima video sia per l'inferenza da
 terminal.
@@ -58,11 +58,11 @@ Il programma prova gli indici da 0 a 9 e stampa quelli validi.
 Richiedono una sessione grafica attiva (monitor collegato, VNC oppure X11
 forwarding). Chiudi con il tasto `q`.
 
-### `object_detection_camera/yolov8_int8_camera.py`
+### `object_detection_camera/yoloV8sINT8/yolov8_int8_camera.py`
 Pipeline ottimizzata per modelli YOLOv8 INT8 con gestione del buffering per FPS
 più alti.
 ```bash
-python3 object_detection_camera/yolov8_int8_camera.py \
+python3 yolov8_int8_camera.py \
     --model /home/pi/models/yolov8s-int8.tflite \
     --camera_id 0 \
     --resolution 640x480 \
@@ -71,10 +71,10 @@ python3 object_detection_camera/yolov8_int8_camera.py \
 ```
 Opzioni utili: `--conf_threshold`, `--iou_threshold`, `--show_detailed_stats`.
 
-### `object_detection_camera/yolov8_int8_quant_camera.py`
+### `object_detection_camera/yoloV8sINT8Full/yolov8_int8_quant_camera.py`
 Versione completa con gestione dei parametri di quantizzazione input/output.
 ```bash
-python3 object_detection_camera/yolov8_int8_quant_camera.py \
+python3 yolov8_int8_quant_camera.py \
     --model /home/pi/models/yolov8s-int8.tflite \
     --camera_id 0 \
     --resolution 640x480 \
@@ -82,10 +82,10 @@ python3 object_detection_camera/yolov8_int8_quant_camera.py \
 ```
 Puoi aggiungere `--conf_threshold`, `--iou_threshold` e `--show_fps`.
 
-### `object_detection_camera/efficientdet_camera.py`
+### `object_detection_camera/efficentDet/efficientdet_camera.py`
 Baseline EfficientDet Lite, semplice da adattare a modelli diversi.
 ```bash
-python3 object_detection_camera/efficientdet_camera.py \
+python3 efficientdet_camera.py \
     --model /home/pi/models/efficientdet_lite0.tflite \
     --camera_id 0 \
     --imgsz 320 \
@@ -100,7 +100,7 @@ Perfetta per sessioni SSH: nessuna finestra, ma stampa le detection e gli FPS.
 
 ### `object_detection_terminal/efficientdet_terminal.py`
 ```bash
-python3 object_detection_terminal/efficientdet_terminal.py \
+python3 efficientdet_terminal.py \
     --model /home/pi/models/efficientdet_lite0.tflite \
     --cameraId 0 \
     --frameWidth 640 --frameHeight 480 \
