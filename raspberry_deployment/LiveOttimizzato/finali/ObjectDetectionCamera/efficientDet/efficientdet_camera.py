@@ -1,226 +1,299 @@
+"""Optimized object detection script for EfficientDet Lite models."""
+import argparse
+import sys
+import time
+import threading
+from queue import Queue
+from collections import deque
+
 import cv2
 import numpy as np
-import time
-import argparse
-import tflite_runtime.interpreter as tflite
+from tflite_support.task import core
+from tflite_support.task import processor
+from tflite_support.task import vision
+import utils_optimized
 
-# COCO class names per YOLOv8
-COCO_CLASSES = [
-    'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat',
-    'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat',
-    'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack',
-    'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
-    'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket',
-    'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-    'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake',
-    'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop',
-    'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink',
-    'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'
-]
 
-def non_max_suppression(boxes, scores, classes, iou_threshold=0.5):
-    """Non-Maximum Suppression per eliminare le bounding box duplicate"""
-    if len(boxes) == 0:
-        return [], [], []
-    
-    # Converti in numpy arrays
-    boxes = np.array(boxes, dtype=np.float32)
-    scores = np.array(scores, dtype=np.float32)
-    classes = np.array(classes, dtype=np.int32)
-    
-    # Calcola le aree delle bounding box
-    areas = (boxes[:, 2] - boxes[:, 0]) * (boxes[:, 3] - boxes[:, 1])
-    
-    # Ordina per score decrescente
-    order = scores.argsort()[::-1]
-    
-    keep = []
-    while len(order) > 0:
-        i = order[0]
-        keep.append(i)
+class OptimizedObjectDetector:
+    def __init__(self, model_path: str, num_threads: int, enable_edgetpu: bool, 
+                 score_threshold: float = 0.3, max_results: int = 3):
+        """Initialize the optimized object detector."""
+        self.frame_queue = Queue(maxsize=2)  # Small buffer to avoid latency
+        self.result_queue = Queue(maxsize=2)
+        self.latest_result = None
+        self.running = False
         
-        if len(order) == 1:
-            break
-            
-        # Calcola IoU con le altre box
-        xx1 = np.maximum(boxes[i, 0], boxes[order[1:], 0])
-        yy1 = np.maximum(boxes[i, 1], boxes[order[1:], 1])
-        xx2 = np.minimum(boxes[i, 2], boxes[order[1:], 2])
-        yy2 = np.minimum(boxes[i, 3], boxes[order[1:], 3])
+        # Performance tracking
+        self.fps_counter = 0
+        self.fps_start_time = time.time()
+        self.fps_history = deque(maxlen=30)  # Track last 30 FPS measurements
         
-        w = np.maximum(0, xx2 - xx1)
-        h = np.maximum(0, yy2 - yy1)
+        # Initialize detector
+        base_options = core.BaseOptions(
+            file_name=model_path, 
+            use_coral=enable_edgetpu, 
+            num_threads=num_threads
+        )
+        detection_options = processor.DetectionOptions(
+            max_results=max_results, 
+            score_threshold=score_threshold
+        )
+        options = vision.ObjectDetectorOptions(
+            base_options=base_options, 
+            detection_options=detection_options
+        )
+        self.detector = vision.ObjectDetector.create_from_options(options)
         
-        intersection = w * h
-        union = areas[i] + areas[order[1:]] - intersection
-        iou = intersection / (union + 1e-6)
+        # Start inference thread
+        self.inference_thread = threading.Thread(target=self._inference_worker, daemon=True)
         
-        # Mantieni solo le box con IoU < threshold
-        indices = np.where(iou <= iou_threshold)[0]
-        order = order[indices + 1]
-    
-    return boxes[keep].tolist(), scores[keep].tolist(), classes[keep].tolist()
-
-def preprocess_frame(frame, input_size):
-    """Preprocessing ottimizzato del frame"""
-    # Resize mantenendo aspect ratio se necessario
-    input_img = cv2.resize(frame, (input_size, input_size), interpolation=cv2.INTER_LINEAR)
-    input_img = cv2.cvtColor(input_img, cv2.COLOR_BGR2RGB)
-    input_img = input_img.astype(np.float32) / 255.0
-    return np.expand_dims(input_img, axis=0)
-
-
-# Argomenti da linea di comando
-parser = argparse.ArgumentParser()
-parser.add_argument('--model', required=True, help='Path to the .tflite model file')
-parser.add_argument('--camera_id', type=int, default=0, help='Camera ID')
-parser.add_argument('--imgsz', type=int, default=640, help='Inference image size (square)')
-parser.add_argument('--conf_threshold', type=float, default=0.5, help='Confidence threshold')
-parser.add_argument('--iou_threshold', type=float, default=0.5, help='IoU threshold for NMS')
-parser.add_argument('--num_threads', type=int, default=4, help='Number of threads')
-parser.add_argument('--skip_frames', type=int, default=2, help='Skip frames for better performance')
-args = parser.parse_args()
-
-# Inizializzazione modello
-
-print("Caricamento modello...")
-interpreter = tflite.Interpreter(model_path=args.model, num_threads=args.num_threads)
-interpreter.allocate_tensors()
-
-input_details = interpreter.get_input_details()
-output_details = interpreter.get_output_details()
-
-print(f"Input shape: {input_details[0]['shape']}")
-print(f"Output shape: {output_details[0]['shape']}")
-
-
-# Inizializzazione webcam con impostazioni ottimizzate
-
-cap = cv2.VideoCapture(args.camera_id)
-
-# Impostazioni ottimizzate per Raspberry Pi
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)  # Risoluzione più bassa per migliori FPS
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-cap.set(cv2.CAP_PROP_FPS, 30)
-cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Buffer minimo per ridurre latency
-
-# Variabili per il controllo dei frame
-frame_count = 0
-fps_counter = 0
-fps_start_time = time.time()
-
-print(" Inference running. Press 'q' to quit.")
-
-while cap.isOpened():
-    ret, frame = cap.read()
-    if not ret:
-        print(" Frame non disponibile.")
-        break
-    
-    frame_count += 1
-    
-    # Skip frames per migliorare le performance
-    if frame_count % (args.skip_frames + 1) != 0:
-        cv2.imshow("YOLOv8 INT8 TFLite", frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-        continue
-    
-    # Preprocessing
-    input_img = preprocess_frame(frame, args.imgsz)
-    
-    # Inference
-    interpreter.set_tensor(input_details[0]['index'], input_img)
-    
-    start_time = time.time()
-    interpreter.invoke()
-    inference_time = time.time() - start_time
-    
-    # Post-processing
-    output_data = interpreter.get_tensor(output_details[0]['index'])[0]
-    pred = output_data.transpose(1, 0)  # (8400, 84)
-    
-    boxes = []
-    scores = []
-    classes = []
-    
-    # Estrazione delle detection con soglia di confidenza
-    for det in pred:
-        # Per YOLOv8, le prime 4 sono coordinate, poi objectness + classi
-        obj_conf = det[4]  # Object confidence
-        
-        if obj_conf > args.conf_threshold:
-            # Trova la classe con score più alto
-            class_scores = det[5:]  # Score delle classi
-            class_id = np.argmax(class_scores)
-            class_conf = class_scores[class_id]
-            
-            # Score finale = objectness * class_confidence
-            final_score = obj_conf * class_conf
-            
-            if final_score > args.conf_threshold:
-                # Coordinate (formato center_x, center_y, width, height)
-                cx, cy, w, h = det[0], det[1], det[2], det[3]
+    def _inference_worker(self):
+        """Worker thread for running inference."""
+        while self.running:
+            try:
+                # Get frame from queue (non-blocking)
+                if not self.frame_queue.empty():
+                    rgb_image = self.frame_queue.get_nowait()
+                    
+                    # Create tensor and run detection
+                    input_tensor = vision.TensorImage.create_from_array(rgb_image)
+                    detection_result = self.detector.detect(input_tensor)
+                    
+                    # Store result (overwrite if queue is full)
+                    if self.result_queue.full():
+                        try:
+                            self.result_queue.get_nowait()  # Remove old result
+                        except:
+                            pass
+                    self.result_queue.put(detection_result)
+                    
+                    # Clear remaining frames to avoid latency buildup
+                    while not self.frame_queue.empty():
+                        try:
+                            self.frame_queue.get_nowait()
+                        except:
+                            break
+                            
+                time.sleep(0.001)  # Small delay to prevent excessive CPU usage
                 
-                # Converti in pixel coordinates
-                x1 = int((cx - w / 2) * frame.shape[1])
-                y1 = int((cy - h / 2) * frame.shape[0])
-                x2 = int((cx + w / 2) * frame.shape[1])
-                y2 = int((cy + h / 2) * frame.shape[0])
+            except Exception as e:
+                print(f"Inference error: {e}")
+                continue
                 
-                # Clamp alle dimensioni dell'immagine
-                x1 = max(0, min(x1, frame.shape[1]))
-                y1 = max(0, min(y1, frame.shape[0]))
-                x2 = max(0, min(x2, frame.shape[1]))
-                y2 = max(0, min(y2, frame.shape[0]))
-                
-                if x2 > x1 and y2 > y1:  # Verifica che la box sia valida
-                    boxes.append([x1, y1, x2, y2])
-                    scores.append(final_score)
-                    classes.append(class_id)
-    
-    # Applica Non-Maximum Suppression
-    if boxes:
-        boxes, scores, classes = non_max_suppression(boxes, scores, classes, args.iou_threshold)
-    
-    # Drawing
-    for box, score, cls_id in zip(boxes, scores, classes):
-        x1, y1, x2, y2 = map(int, box)
+    def start(self):
+        """Start the detector."""
+        self.running = True
+        self.inference_thread.start()
         
-        # Colore basato sulla classe
-        color = (0, 255, 0) if cls_id < 10 else (255, 0, 0)
+    def stop(self):
+        """Stop the detector."""
+        self.running = False
+        if self.inference_thread.is_alive():
+            self.inference_thread.join(timeout=1.0)
+            
+    def process_frame(self, image: np.ndarray) -> np.ndarray:
+        """Process a single frame."""
+        # Convert BGR to RGB for inference
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         
-        cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+        # Add frame to queue for inference (non-blocking)
+        if not self.frame_queue.full():
+            self.frame_queue.put(rgb_image)
         
-        # Label con nome classe se disponibile
-        if cls_id < len(COCO_CLASSES):
-            label = f"{COCO_CLASSES[cls_id]}: {score:.2f}"
-        else:
-            label = f"Class {cls_id}: {score:.2f}"
+        # Get latest detection result
+        while not self.result_queue.empty():
+            try:
+                self.latest_result = self.result_queue.get_nowait()
+            except:
+                break
         
-        # Background per il testo
-        (text_width, text_height), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
-        cv2.rectangle(frame, (x1, y1 - text_height - 5), (x1 + text_width, y1), color, -1)
-        cv2.putText(frame, label, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        # Visualize with latest available result
+        if self.latest_result is not None:
+            image = utils_optimized.visualize(image, self.latest_result)
+        
+        return image
     
-    # Calcola FPS
-    fps_counter += 1
-    if time.time() - fps_start_time >= 1.0:
-        fps = fps_counter / (time.time() - fps_start_time)
-        fps_counter = 0
-        fps_start_time = time.time()
-    else:
-        fps = fps_counter / (time.time() - fps_start_time + 1e-6)
-    
-    # Info display
-    info_text = f"FPS: {fps:.1f} | Inference: {inference_time*1000:.1f}ms | Objects: {len(boxes)}"
-    cv2.putText(frame, info_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)
-    
-    cv2.imshow("YOLOv8 INT8 TFLite", frame)
-    
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    def get_fps(self) -> float:
+        """Calculate and return current FPS."""
+        self.fps_counter += 1
+        
+        if self.fps_counter % 10 == 0:  # Calculate every 10 frames
+            current_time = time.time()
+            fps = 10 / (current_time - self.fps_start_time)
+            self.fps_history.append(fps)
+            self.fps_start_time = current_time
+            
+        # Return smoothed FPS
+        return sum(self.fps_history) / len(self.fps_history) if self.fps_history else 0
 
-cap.release()
-cv2.destroyAllWindows()
-print(" Applicazione terminata.")
+
+def find_available_cameras():
+    """Find all available camera indices."""
+    available_cameras = []
+    for i in range(10):  # Check first 10 camera indices
+        cap = cv2.VideoCapture(i)
+        if cap.isOpened():
+            available_cameras.append(i)
+            cap.release()
+    return available_cameras
+
+
+def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
+        enable_edgetpu: bool, score_threshold: float = 0.3) -> None:
+    """Run optimized object detection."""
+    
+    # Find available cameras
+    available_cameras = find_available_cameras()
+    print(f"Available cameras: {available_cameras}")
+    
+    if not available_cameras:
+        sys.exit('ERROR: No cameras found')
+    
+    # If requested camera is not available, use the first available one
+    if camera_id not in available_cameras:
+        print(f"Camera {camera_id} not available. Using camera {available_cameras[0]} instead.")
+        camera_id = available_cameras[0]
+    
+    # Initialize camera with optimizations
+    cap = cv2.VideoCapture(camera_id)
+    
+    # Camera optimizations
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
+    cap.set(cv2.CAP_PROP_FPS, 30)  # Set target FPS
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Minimize buffer to reduce latency
+    
+    # Additional optimizations for specific backends
+    backend = cap.get(cv2.CAP_PROP_BACKEND)
+    print(f"Camera backend: {backend}")
+    
+    if backend == cv2.CAP_V4L2:
+        cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+    
+    if not cap.isOpened():
+        sys.exit(f'ERROR: Unable to open camera {camera_id}')
+    
+    # Verify actual resolution
+    actual_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    actual_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    actual_fps = cap.get(cv2.CAP_PROP_FPS)
+    
+    print(f"Camera {camera_id} opened successfully")
+    print(f"Requested resolution: {width}x{height}")
+    print(f"Actual resolution: {actual_width}x{actual_height}")
+    print(f"Camera FPS: {actual_fps}")
+    
+    # Initialize detector
+    detector = OptimizedObjectDetector(
+        model, num_threads, enable_edgetpu, score_threshold
+    )
+    detector.start()
+    
+    # Display parameters
+    font_size = 1
+    font_thickness = 1
+    text_color = (0, 255, 0)  # Green for better visibility
+    
+    print("Starting optimized object detection...")
+    print("Press ESC to exit")
+    
+    try:
+        while True:
+            success, image = cap.read()
+            if not success:
+                print("Failed to read frame")
+                continue
+            
+            # Flip image horizontally for mirror effect
+            image = cv2.flip(image, 1)
+            
+            # Process frame
+            image = detector.process_frame(image)
+            
+            # Display FPS
+            fps = detector.get_fps()
+            fps_text = f'FPS: {fps:.1f}'
+            cv2.putText(image, fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX,
+                       font_size, text_color, font_thickness)
+            
+            # Display resolution info
+            res_text = f'Resolution: {width}x{height}'
+            cv2.putText(image, res_text, (10, 60), cv2.FONT_HERSHEY_SIMPLEX,
+                       0.7, text_color, 1)
+            
+            # Show frame
+            cv2.imshow('Optimized Object Detection', image)
+            
+            # Check for exit
+            key = cv2.waitKey(1) & 0xFF
+            if key == 27:  # ESC key
+                break
+                
+    except KeyboardInterrupt:
+        print("\nStopping detection...")
+        
+    finally:
+        detector.stop()
+        cap.release()
+        cv2.destroyAllWindows()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        '--model',
+        help='Path of the object detection model.',
+        required=False,
+        default='efficientdet_lite0.tflite')
+    parser.add_argument(
+        '--cameraId', 
+        help='Id of camera.', 
+        required=False, 
+        type=int, 
+        default=0)
+    parser.add_argument(
+        '--frameWidth',
+        help='Width of frame to capture from camera.',
+        required=False,
+        type=int,
+        default=640)  # Reduced from default for better performance
+    parser.add_argument(
+        '--frameHeight',
+        help='Height of frame to capture from camera.',
+        required=False,
+        type=int,
+        default=480)  # Reduced from default for better performance
+    parser.add_argument(
+        '--numThreads',
+        help='Number of CPU threads to run the model.',
+        required=False,
+        type=int,
+        default=4)
+    parser.add_argument(
+        '--enableEdgeTPU',
+        help='Whether to run the model on EdgeTPU.',
+        action='store_true',
+        required=False,
+        default=False)
+    parser.add_argument(
+        '--scoreThreshold',
+        help='Minimum confidence score for detections.',
+        required=False,
+        type=float,
+        default=0.3)
+    
+    args = parser.parse_args()
+    
+    print(f"Starting with model: {args.model}")
+    print(f"Resolution: {args.frameWidth}x{args.frameHeight}")
+    print(f"Threads: {args.numThreads}")
+    print(f"EdgeTPU: {args.enableEdgeTPU}")
+    print(f"Score threshold: {args.scoreThreshold}")
+    
+    run(args.model, args.cameraId, args.frameWidth, args.frameHeight,
+        args.numThreads, args.enableEdgeTPU, args.scoreThreshold)
+
+
+if __name__ == '__main__':
+    main()
